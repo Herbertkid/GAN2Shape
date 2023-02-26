@@ -1,11 +1,11 @@
 
-#Run the project on Windows guide
+# Run the project on Windows guide
 
 I use the windows 11 to run this code.
 
 The following is what I set up for the environment:
 
-First create a env in the anaconda and install several packages.
+1.First create a env in the anaconda and install several packages.
 ```sh
 conda create --name pytorch python=3.7
 conda activate pytorch
@@ -15,12 +15,12 @@ conda install -c conda-forge opencv pandas matplotlib tqdm -y
 conda install -c conda-forge scikit-learn scikit-image -y
 ```
 
-Second install nerual_render:
+2.Second install nerual_render:
 ```sh
 git clone https://github.com/daniilidis-group/neural_renderer.git
 cd neural_renderer
 ```
-Need to change pytorch code:
+3.Need to change pytorch code:
 ```sh
 /anaconda/Lib/site-packages/torch/utils/cpp_extension.py
 ```
@@ -32,7 +32,8 @@ to
 ```sh
 match = re.search(r'(\d+)\.(\d+)\.(\d+)', compiler_info.decode(' gbk').strip())
 ```
-Need to change some code in neural_rendenerer>cuda>
+
+4.Need to change some code in neural_rendenerer>cuda>
 ```sh
 /cuda/create_texture_image_cuda.cpp
 /cuda/load_textures_cuda.cpp
@@ -40,11 +41,14 @@ Need to change some code in neural_rendenerer>cuda>
 ```
 Change all AT_CHECK to TORCH_CHECK
 
-In /cuda/rasterize_cuda_kernel.cu comment this function: ```sh static __inline__ __device__ double atomicAdd(double* address, double val)```
-Under pytorch env:
+In /cuda/rasterize_cuda_kernel.cu comment this function: ``` static __inline__ __device__ double atomicAdd(double* address, double val)```
+
+5.Under pytorch env:
 ```sh
 python setup.py install
 ```
+6.Then install mmvc ```pip install mmcv``` and other related packages (if needed)
+
 
 # Do 2D GANs Know 3D Shape? Unsupervised 3D Shape Reconstruction from 2D Image GANs
 
