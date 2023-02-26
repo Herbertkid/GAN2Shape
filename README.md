@@ -1,3 +1,51 @@
+
+#Run the project on Windows guide
+
+I use the windows 11 to run this code.
+
+The following is what I set up for the environment:
+
+First create a env in the anaconda and install several packages.
+```sh
+conda create --name pytorch python=3.7
+conda activate pytorch
+conda install pytorch==1.7.0 torchvision torchaudio cudatoolkit=11.0 -c pytorch
+conda install -c conda-forge tensorboardx notebook -y
+conda install -c conda-forge opencv pandas matplotlib tqdm -y
+conda install -c conda-forge scikit-learn scikit-image -y
+```
+
+Second install nerual_render:
+```sh
+git clone https://github.com/daniilidis-group/neural_renderer.git
+cd neural_renderer
+```
+Need to change pytorch code:
+```sh
+/anaconda/Lib/site-packages/torch/utils/cpp_extension.py
+```
+Line 233:
+```sh
+match = re.search(r'(\d+)\.(\d+)\.(\d+)', compiler_info.decode().strip())
+```
+to 
+```sh
+match = re.search(r'(\d+)\.(\d+)\.(\d+)', compiler_info.decode(' gbk').strip())
+```
+Need to change some code in neural_rendenerer>cuda>
+```sh
+/cuda/create_texture_image_cuda.cpp
+/cuda/load_textures_cuda.cpp
+/cuda/rasterize_cuda.cpp
+```
+Change all AT_CHECK to TORCH_CHECK
+
+In /cuda/rasterize_cuda_kernel.cu comment this function: ```sh static __inline__ __device__ double atomicAdd(double* address, double val)```
+Under pytorch env:
+```sh
+python setup.py install
+```
+
 # Do 2D GANs Know 3D Shape? Unsupervised 3D Shape Reconstruction from 2D Image GANs
 
 <p align="center">
