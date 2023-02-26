@@ -47,7 +47,26 @@ In /cuda/rasterize_cuda_kernel.cu comment this function: ``` static __inline__ _
 ```sh
 python setup.py install
 ```
-6.Then install mmvc ```pip install mmcv``` and other related packages (if needed)
+6.Then install mmvc ```pip install mmcv``` 
+
+7.Before training, you may optionally compile StyleGAN2 operations, which would be faster:
+```sh
+cd gan2shape/stylegan/stylegan2-pytorch/op
+python setup.py install
+cd ../../../..
+```
+
+8.To download dataset and pre-trained weights, simply run:
+in scripts/download.sh
+you can run each one in the terminal.
+
+9. set configs from the sh file directly in run.py
+
+10. run
+```sh
+python run.py
+```
+and other related packages (if needed)
 
 
 # Do 2D GANs Know 3D Shape? Unsupervised 3D Shape Reconstruction from 2D Image GANs
