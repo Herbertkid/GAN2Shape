@@ -57,10 +57,12 @@ cd ../../../..
 ```
 
 8.To download dataset and pre-trained weights, simply run:
-in scripts/download.sh
+in ```scripts/download.sh```
 you can run each one in the terminal.
 
-9. set configs from the sh file directly in run.py
+
+9. set configs from the sh file directly in ```run.py```
+
 
 10. run
 ```sh
